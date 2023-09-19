@@ -2,12 +2,11 @@ module GPUArraysCore
 
 using Adapt
 
-
 ## essential types
 
 export AbstractGPUArray, AbstractGPUVector, AbstractGPUMatrix, AbstractGPUVecOrMat,
        WrappedGPUArray, AnyGPUArray, AbstractGPUArrayStyle,
-       AnyGPUArray, AnyGPUVector, AnyGPUMatrix
+       AnyGPUArray, AnyGPUVector, AnyGPUMatrix, AbstractGPUView
 
 """
     AbstractGPUArray{T, N} <: DenseArray{T, N}
@@ -21,6 +20,7 @@ abstract type AbstractGPUArray{T, N} <: DenseArray{T, N} end
 const AbstractGPUVector{T} = AbstractGPUArray{T, 1}
 const AbstractGPUMatrix{T} = AbstractGPUArray{T, 2}
 const AbstractGPUVecOrMat{T} = Union{AbstractGPUArray{T, 1}, AbstractGPUArray{T, 2}}
+const AbstractGPUView{T, N} = Union{AbstractGPUArray{T,N}, SubArray{T, N, AbstractGPUArray{T,N} } }
 
 # convenience aliases for working with wrapped arrays
 const WrappedGPUArray{T,N} = WrappedArray{T,N,AbstractGPUArray,AbstractGPUArray{T,N}}

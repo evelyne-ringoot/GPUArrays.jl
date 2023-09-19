@@ -138,9 +138,9 @@ end
 # hacky overloads to make simple vcat and hcat with numbers work as expected.
 # we can't really make this work in general without Base providing
 # a dispatch mechanism for output container type.
-@inline Base.vcat(a::Number, b::AbstractGPUArray) =
+@inline Base.vcat(a::Number, b::AbstractGPUView) =
     vcat(fill!(similar(b, typeof(a), (1,size(b)[2:end]...)), a), b)
-@inline Base.hcat(a::Number, b::AbstractGPUArray) =
+@inline Base.hcat(a::Number, b::AbstractGPUView) =
     hcat(fill!(similar(b, typeof(a), (size(b)[1:end-1]...,1)), a), b)
 
 
